@@ -5,13 +5,36 @@ import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 import 'package:ibank/core/widgets/text_field_widget.dart';
 
-class ForgotPassword extends StatelessWidget {
+class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
+
+  @override
+  State<ForgotPassword> createState() => _ForgotPasswordState();
+}
+
+class _ForgotPasswordState extends State<ForgotPassword> {
+  final _emailController = TextEditingController();
+  bool _isFieldActive = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController.addListener(() {
+      final isFieldActive = _emailController.text.isNotEmpty;
+      setState(() => _isFieldActive = isFieldActive);
+    });
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary1,
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -19,56 +42,48 @@ class ForgotPassword extends StatelessWidget {
             const SizedBox(height: 16),
             _topBarWidget(context),
             const SizedBox(height: 16),
-            Expanded(
-              child: Container(
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height,
-                ),
-                decoration: const BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Forgot Password',
-                        style: AppTextStyles.title2.copyWith(
-                          color: AppColors.primary1,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        'Enter your email to reset your password',
-                        style: AppTextStyles.caption1.copyWith(
-                          color: AppColors.neutral1,
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      Center(
-                        child: Image(
-                          width: 150,
-                          image: AssetImage('assets/images/auth-1.jpg'),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      const TextFieldWidget(
-                        hintText: 'example@email.com',
-                        labelText: 'Email',
-                      ),
-                      const SizedBox(height: 30),
-                      ButtonWidget(
-                        buttonText: 'Send Reset Link',
-                        isActive: true,
-                        onPressed: () {
-                          // Handle password reset logic
-                        },
-                      ),
-                    ],
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                // border: Border.all(color: AppColors.neutral1),
+                borderRadius: BorderRadius.all(Radius.circular(24)),
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 4,
+                    color: AppColors.neutral5,
+                    offset: Offset(0, 1),
+                    spreadRadius: 0,
                   ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Enter your email to reset your password',
+                      style: AppTextStyles.caption1.copyWith(
+                        color: AppColors.neutral1,
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    TextFieldWidget(
+                      controller: _emailController,
+                      hintText: 'example@email.com',
+                      labelText: 'Email',
+                    ),
+                    const SizedBox(height: 20),
+                    ButtonWidget(
+                      isActive: _isFieldActive,
+                      buttonText: 'Send',
+                      onPressed: () => context.pushNamed('otpverification'),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -82,7 +97,7 @@ class ForgotPassword extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 50,
-      decoration: BoxDecoration(color: AppColors.primary1),
+      decoration: BoxDecoration(color: AppColors.white),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -92,14 +107,14 @@ class ForgotPassword extends StatelessWidget {
             },
             icon: Icon(
               Icons.arrow_back_ios_new,
-              color: AppColors.white,
+              color: AppColors.neutral1,
               size: 16,
             ),
             padding: EdgeInsets.zero,
           ),
           Text(
             'Forgot Password',
-            style: AppTextStyles.body3.copyWith(color: AppColors.white),
+            style: AppTextStyles.body3.copyWith(color: AppColors.neutral1),
           ),
         ],
       ),

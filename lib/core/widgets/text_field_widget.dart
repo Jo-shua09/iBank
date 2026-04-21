@@ -8,11 +8,13 @@ class TextFieldWidget extends StatelessWidget {
     required this.hintText,
     required this.labelText,
     this.password = false,
+    this.controller,
   });
 
   final String hintText;
   final String labelText;
   final bool password;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class TextFieldWidget extends StatelessWidget {
         const SizedBox(height: 4),
         TextField(
           obscureText: password,
+          controller: controller,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(color: AppColors.neutral4),

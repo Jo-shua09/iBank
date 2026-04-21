@@ -2,11 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
+import 'package:ibank/features/auth/controllers/sign_in_controller.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 import 'package:ibank/core/widgets/text_field_widget.dart';
 
-class SignIn extends StatelessWidget {
-  const SignIn({super.key});
+class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
+
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+  late final SignInController _signInController;
+
+  @override
+  void initState() {
+    super.initState();
+    _signInController = SignInController();
+    _signInController.addListener(() {
+      setState(() {}); // Rebuilds the widget when controller notifies changes
+    });
+  }
+
+  @override
+  void dispose() {
+    _signInController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,79 +44,82 @@ class SignIn extends StatelessWidget {
             const SizedBox(height: 16),
             Expanded(
               child: Container(
-                constraints: BoxConstraints(
-                  minHeight: MediaQuery.of(context).size.height,
-                ),
                 decoration: const BoxDecoration(
                   color: AppColors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Welcome Back',
-                        style: AppTextStyles.title2.copyWith(
-                          color: AppColors.primary1,
-                          fontWeight: FontWeight.w600,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: 30.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Welcome Back',
+                          style: AppTextStyles.title2.copyWith(
+                            color: AppColors.primary1,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Hello there, sign in to continue',
-                        style: AppTextStyles.caption1.copyWith(
-                          color: AppColors.neutral1,
+                        Text(
+                          'Hello there, sign in to continue',
+                          style: AppTextStyles.caption1.copyWith(
+                            color: AppColors.neutral1,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 30),
-                      Center(
-                        child: Image(
-                          width: 150,
-                          image: AssetImage('assets/images/auth-1.jpg'),
+                        const SizedBox(height: 30),
+                        Center(
+                          child: Image(
+                            width: 150,
+                            image: AssetImage('assets/images/auth-1.jpg'),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 30),
-                      TextFieldWidget(
-                        hintText: 'example@email.com',
-                        labelText: 'Email',
-                      ),
-                      const SizedBox(height: 16),
-                      TextFieldWidget(
-                        hintText: '',
-                        labelText: 'Password',
-                        password: true,
-                      ),
-                      const SizedBox(height: 4),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () => context.goNamed('forgotpassword'),
-                          child: Text(
-                            'Forgot Password?',
-                            style: AppTextStyles.caption1.copyWith(
-                              color: AppColors.neutral1,
+                        const SizedBox(height: 30),
+                        TextFieldWidget(
+                          controller: _signInController.emailController,
+                          hintText: 'example@email.com',
+                          labelText: 'Email',
+                        ),
+                        const SizedBox(height: 16),
+                        TextFieldWidget(
+                          controller: _signInController.passwordController,
+                          hintText: '',
+                          labelText: 'Password',
+                          password: true,
+                        ),
+                        const SizedBox(height: 4),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () =>
+                                context.pushNamed('forgotpassword'),
+                            child: Text(
+                              'Forgot Password?',
+                              style: AppTextStyles.caption1.copyWith(
+                                color: AppColors.neutral1,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      ButtonWidget(
-                        buttonText: 'Sign In',
-                        isActive: false,
-                        onPressed: () => context.goNamed('signup'),
-                      ),
-                      const SizedBox(height: 24),
-                      Center(
-                        child: Image(
-                          width: 70,
-                          image: AssetImage('assets/images/fingerprint.jpg'),
+                        const SizedBox(height: 20),
+                        ButtonWidget(
+                          buttonText: 'Sign In',
+                          isActive: _signInController.isButtonActive,
+                          onPressed: () => _signInController.signIn(),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Expanded(
-                        child: Align(
+                        const SizedBox(height: 24),
+                        Center(
+                          child: Image(
+                            width: 70,
+                            image: AssetImage('assets/images/fingerprint.jpg'),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Align(
                           alignment: Alignment.center,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -118,8 +144,8 @@ class SignIn extends StatelessWidget {
                             ],
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

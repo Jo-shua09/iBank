@@ -20,16 +20,20 @@ class ButtonWidget extends StatelessWidget {
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: isActive ? onPressed : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: isActive ? AppColors.primary1 : AppColors.neutral4,
+          disabledBackgroundColor: AppColors.neutral4,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
+          elevation: 0,
         ),
         child: Text(
           buttonText,
-          style: AppTextStyles.body3.copyWith(color: AppColors.white),
+          style: AppTextStyles.body3.copyWith(
+            color: isActive ? AppColors.white : AppColors.neutral2,
+          ),
         ),
       ),
     );

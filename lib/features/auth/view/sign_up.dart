@@ -2,21 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
+import 'package:ibank/features/auth/controllers/sign_up_controller.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 import 'package:ibank/core/widgets/text_field_widget.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+  const SignUp({Key? key}) : super(key: key);
 
   @override
   State<SignUp> createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
+  late final SignUpController _signUpController;
+
+  @override
+  void initState() {
+    super.initState();
+    _signUpController = SignUpController();
+    _signUpController.addListener(() {
+      setState(() {}); // Rebuilds the widget when controller notifies changes
+    });
+  }
+
+  @override
+  void dispose() {
+    _signUpController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool _isChecked = false;
-
     return Scaffold(
       backgroundColor: AppColors.primary1,
       body: SafeArea(
@@ -24,7 +40,9 @@ class _SignUpState extends State<SignUp> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(height: 16),
-            _topBarWidget(),
+            _topBarWidget(
+              context,
+            ), // Renamed from _topBarWidget to accept context
             const SizedBox(height: 16),
             Expanded(
               child: SingleChildScrollView(
@@ -66,22 +84,27 @@ class _SignUpState extends State<SignUp> {
                         ),
                         const SizedBox(height: 30),
                         TextFieldWidget(
+                          controller: _signUpController.fullNameController,
                           hintText: 'John Doe',
                           labelText: 'Full Name',
                         ),
                         const SizedBox(height: 16),
                         TextFieldWidget(
+                          controller: _signUpController.emailController,
                           hintText: 'example@email.com',
                           labelText: 'Email',
                         ),
                         const SizedBox(height: 16),
                         TextFieldWidget(
+                          controller: _signUpController.passwordController,
                           hintText: '',
                           labelText: 'Password',
                           password: true,
                         ),
                         const SizedBox(height: 16),
                         TextFieldWidget(
+                          controller:
+                              _signUpController.confirmPasswordController,
                           hintText: '',
                           labelText: 'Confirm Password',
                           password: true,
@@ -100,11 +123,9 @@ class _SignUpState extends State<SignUp> {
                                 width: .9,
                                 color: AppColors.neutral4,
                               ),
-                              value: _isChecked,
+                              value: _signUpController.isChecked,
                               onChanged: (bool? value) {
-                                setState(() {
-                                  _isChecked = value ?? true;
-                                });
+                                _signUpController.toggleCheckbox(value);
                               },
                             ),
                             const SizedBox(width: 4),
@@ -136,8 +157,8 @@ class _SignUpState extends State<SignUp> {
                         const SizedBox(height: 30),
                         ButtonWidget(
                           buttonText: 'Sign Up',
-                          isActive: false,
-                          onPressed: () => context.goNamed('signup'),
+                          isActive: _signUpController.isButtonActive,
+                          onPressed: () => _signUpController.signUp(),
                         ),
                         const SizedBox(height: 20),
                         Align(
@@ -177,7 +198,7 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  Widget _topBarWidget() {
+  Widget _topBarWidget(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 50,
