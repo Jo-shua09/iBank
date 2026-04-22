@@ -77,9 +77,9 @@ class _SignUpState extends State<SignUp> {
                         ),
                         const SizedBox(height: 30),
                         Center(
-                          child: Image(
+                          child: Image.asset(
+                            'assets/images/auth-2.jpg',
                             width: 150,
-                            image: AssetImage('assets/images/auth-2.jpg'),
                           ),
                         ),
                         const SizedBox(height: 30),
@@ -87,12 +87,14 @@ class _SignUpState extends State<SignUp> {
                           controller: _signUpController.fullNameController,
                           hintText: 'John Doe',
                           labelText: 'Full Name',
+                          keyboardType: TextInputType.text,
                         ),
                         const SizedBox(height: 16),
                         TextFieldWidget(
                           controller: _signUpController.emailController,
                           hintText: 'example@email.com',
                           labelText: 'Email',
+                          keyboardType: TextInputType.emailAddress,
                         ),
                         const SizedBox(height: 16),
                         TextFieldWidget(
@@ -100,6 +102,7 @@ class _SignUpState extends State<SignUp> {
                           hintText: '',
                           labelText: 'Password',
                           password: true,
+                          keyboardType: TextInputType.visiblePassword,
                         ),
                         const SizedBox(height: 16),
                         TextFieldWidget(
@@ -108,6 +111,7 @@ class _SignUpState extends State<SignUp> {
                           hintText: '',
                           labelText: 'Confirm Password',
                           password: true,
+                          keyboardType: TextInputType.visiblePassword,
                         ),
                         const SizedBox(height: 8),
                         Row(
@@ -158,7 +162,7 @@ class _SignUpState extends State<SignUp> {
                         ButtonWidget(
                           buttonText: 'Sign Up',
                           isActive: _signUpController.isButtonActive,
-                          onPressed: () => _signUpController.signUp(),
+                          onPressed: () => _signUpController.signUp(context),
                         ),
                         const SizedBox(height: 20),
                         Align(

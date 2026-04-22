@@ -3,6 +3,8 @@ import 'package:ibank/features/auth/view/forgot_password.dart';
 import 'package:ibank/features/auth/view/otp_verification.dart';
 import 'package:ibank/features/auth/view/sign_in.dart';
 import 'package:ibank/features/auth/view/sign_up.dart';
+import 'package:ibank/features/auth/view/success_screen.dart';
+import 'package:ibank/features/home/view/home_screen.dart';
 import 'package:ibank/features/splash_screen.dart';
 
 class AppRouter {
@@ -12,6 +14,8 @@ class AppRouter {
   static const String signUp = '/sign-up';
   static const String forgotPassword = '/forgot-password';
   static const String otpVerification = '/otp-verification';
+  static const String successScreen = '/success-screen';
+  static const String homeScreen = '/home-screen';
 
   static final router = GoRouter(
     initialLocation: splash,
@@ -38,8 +42,18 @@ class AppRouter {
       ),
       GoRoute(
         path: otpVerification,
-        name: 'otpverification',
+        name: 'otp',
         builder: (context, state) => const OtpVerification(),
+      ),
+      GoRoute(
+        path: successScreen,
+        name: 'success',
+        builder: (context, state) => const SuccessScreen(),
+      ),
+      GoRoute(
+        path: homeScreen,
+        name: 'home',
+        builder: (context, state) => const HomeScreen(),
       ),
     ],
   );

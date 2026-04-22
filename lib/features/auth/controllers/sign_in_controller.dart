@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInController extends ChangeNotifier {
   final TextEditingController emailController = TextEditingController();
@@ -33,10 +34,11 @@ class SignInController extends ChangeNotifier {
   }
 
   // You can add your sign-in logic here
-  void signIn() {
+  void home(BuildContext context) {
     if (_isButtonActive) {
       // Perform sign-in, e.g., call an authentication service
-      print('Success');
+      context.goNamed('home');
+      print('success');
     }
   }
 }

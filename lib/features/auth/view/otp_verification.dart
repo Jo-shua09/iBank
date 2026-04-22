@@ -77,6 +77,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                         Expanded(
                           child: TextField(
                             controller: _otpController,
+                            keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               hintStyle: TextStyle(color: AppColors.neutral4),
                               border: OutlineInputBorder(
@@ -125,7 +126,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                     ButtonWidget(
                       isActive: _isFieldActive,
                       buttonText: 'Change Password',
-                      onPressed: () => context.pushNamed('home'),
+                      onPressed: () => context.pushNamed('success'),
                     ),
                   ],
                 ),

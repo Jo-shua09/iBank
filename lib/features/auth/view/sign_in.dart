@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
@@ -73,9 +74,9 @@ class _SignInState extends State<SignIn> {
                         ),
                         const SizedBox(height: 30),
                         Center(
-                          child: Image(
+                          child: Image.asset(
+                            'assets/images/auth-1.jpg',
                             width: 150,
-                            image: AssetImage('assets/images/auth-1.jpg'),
                           ),
                         ),
                         const SizedBox(height: 30),
@@ -83,6 +84,7 @@ class _SignInState extends State<SignIn> {
                           controller: _signInController.emailController,
                           hintText: 'example@email.com',
                           labelText: 'Email',
+                          keyboardType: TextInputType.emailAddress,
                         ),
                         const SizedBox(height: 16),
                         TextFieldWidget(
@@ -90,6 +92,7 @@ class _SignInState extends State<SignIn> {
                           hintText: '',
                           labelText: 'Password',
                           password: true,
+                          keyboardType: TextInputType.visiblePassword,
                         ),
                         const SizedBox(height: 4),
                         Align(
@@ -109,13 +112,13 @@ class _SignInState extends State<SignIn> {
                         ButtonWidget(
                           buttonText: 'Sign In',
                           isActive: _signInController.isButtonActive,
-                          onPressed: () => _signInController.signIn(),
+                          onPressed: () => _signInController.home(context),
                         ),
                         const SizedBox(height: 24),
                         Center(
-                          child: Image(
+                          child: Image.asset(
+                            'assets/images/fingerprint.jpg',
                             width: 70,
-                            image: AssetImage('assets/images/fingerprint.jpg'),
                           ),
                         ),
                         const SizedBox(height: 16),

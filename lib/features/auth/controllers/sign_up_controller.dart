@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpController extends ChangeNotifier {
   final TextEditingController fullNameController = TextEditingController();
@@ -55,10 +56,11 @@ class SignUpController extends ChangeNotifier {
   }
 
   // You can add your sign-up logic here
-  void signUp() {
+  void signUp(BuildContext context) {
     if (_isButtonActive) {
       // Perform sign-up, e.g., call an authentication service
       print('Success');
+      context.goNamed('home');
       // Add password matching validation here before proceeding
     }
   }
