@@ -112,7 +112,7 @@ class BottomNavigationWidget extends StatelessWidget {
           if (isActive)
             Flexible(
               child: Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(left: 6.0),
                 child: Text(
                   label,
                   style: AppTextStyles.caption1.copyWith(
