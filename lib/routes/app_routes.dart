@@ -5,6 +5,9 @@ import 'package:ibank/features/auth/view/sign_in.dart';
 import 'package:ibank/features/auth/view/sign_up.dart';
 import 'package:ibank/features/auth/view/success_screen.dart';
 import 'package:ibank/features/home/view/home_screen.dart';
+import 'package:ibank/features/notifications/view/notification_screen.dart';
+import 'package:ibank/features/search/view/search_screen.dart';
+import 'package:ibank/features/settings/view/settings_screen.dart';
 import 'package:ibank/features/splash_screen.dart';
 
 class AppRouter {
@@ -16,6 +19,9 @@ class AppRouter {
   static const String otpVerification = '/otp-verification';
   static const String successScreen = '/success-screen';
   static const String homeScreen = '/home-screen';
+  static const String searchScreen = '/search-screen';
+  static const String notificationScreen = '/notification-screen';
+  static const String settingsScreen = '/settings-screen';
 
   static final router = GoRouter(
     initialLocation: splash,
@@ -54,6 +60,21 @@ class AppRouter {
         path: homeScreen,
         name: 'home',
         builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: settingsScreen,
+        name: 'settings',
+        builder: (context, state) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: searchScreen,
+        name: 'search',
+        builder: (context, state) => const SearchScreen(),
+      ),
+      GoRoute(
+        path: notificationScreen,
+        name: 'notifications',
+        builder: (context, state) => const NotificationScreen(),
       ),
     ],
   );
