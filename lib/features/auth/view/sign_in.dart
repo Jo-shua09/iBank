@@ -180,7 +180,7 @@ class _SignInState extends State<SignIn> {
           ),
           Text(
             'Sign In',
-            style: AppTextStyles.body3.copyWith(color: AppColors.white),
+            style: AppTextStyles.body1.copyWith(color: AppColors.white),
           ),
         ],
       ),

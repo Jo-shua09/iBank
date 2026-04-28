@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 
@@ -27,25 +28,29 @@ class SearchScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      _ListBuilder(
+                      _listBuilder(
+                        context,
                         'Branch',
                         'Search for Branch near you',
                         'assets/images/branch.jpg',
                       ),
                       const SizedBox(height: 16.0),
-                      _ListBuilder(
+                      _listBuilder(
+                        context,
                         'Interest rate',
                         'Search for interest rate',
                         'assets/images/interest.jpg',
                       ),
                       const SizedBox(height: 16.0),
-                      _ListBuilder(
+                      _listBuilder(
+                        context,
                         'Exchange rate',
                         'Search for exchange rate',
                         'assets/images/exchange-rate.jpg',
                       ),
                       const SizedBox(height: 16.0),
-                      _ListBuilder(
+                      _listBuilder(
+                        context,
                         'Exchange',
                         'Search for exchange',
                         'assets/images/exchange.jpg',
@@ -61,7 +66,12 @@ class SearchScreen extends StatelessWidget {
     );
   }
 
-  Widget _ListBuilder(String title, String subtitle, String imageUrl) {
+  Widget _listBuilder(
+    BuildContext context,
+    String title,
+    String subtitle,
+    String imageUrl,
+  ) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
       decoration: BoxDecoration(
@@ -90,7 +100,7 @@ class SearchScreen extends StatelessWidget {
         ),
         trailing: Image.asset(imageUrl),
         onTap: () {
-          // Handle search result tap
+          context.push('/search/$title'.toLowerCase().replaceAll(' ', '-'));
         },
       ),
     );

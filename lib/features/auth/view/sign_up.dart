@@ -223,7 +223,7 @@ class _SignUpState extends State<SignUp> {
           ),
           Text(
             'Sign Up',
-            style: AppTextStyles.body3.copyWith(color: AppColors.white),
+            style: AppTextStyles.body1.copyWith(color: AppColors.white),
           ),
         ],
       ),

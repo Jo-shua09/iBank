@@ -7,6 +7,10 @@ import 'package:ibank/features/auth/view/success_screen.dart';
 import 'package:ibank/features/home/view/home_screen.dart';
 import 'package:ibank/features/notifications/view/notification_screen.dart';
 import 'package:ibank/features/search/view/search_screen.dart';
+import 'package:ibank/features/searches/views/branch_screen.dart';
+import 'package:ibank/features/searches/views/exchange_rate_screen.dart';
+import 'package:ibank/features/searches/views/exchange_screen.dart';
+import 'package:ibank/features/searches/views/interest_screen.dart';
 import 'package:ibank/features/settings/view/settings_screen.dart';
 import 'package:ibank/features/splash_screen.dart';
 
@@ -22,6 +26,10 @@ class AppRouter {
   static const String searchScreen = '/search-screen';
   static const String notificationScreen = '/notification-screen';
   static const String settingsScreen = '/settings-screen';
+  static const String branchScreen = '/search/branch';
+  static const String exchangeRateScreen = '/search/exchange-rate';
+  static const String exchangeScreen = '/search/exchange';
+  static const String interestScreen = '/search/interest';
 
   static final router = GoRouter(
     initialLocation: splash,
@@ -75,6 +83,26 @@ class AppRouter {
         path: notificationScreen,
         name: 'notifications',
         builder: (context, state) => const NotificationScreen(),
+      ),
+      GoRoute(
+        path: branchScreen,
+        name: 'branch',
+        builder: (context, state) => const BranchScreen(),
+      ),
+      GoRoute(
+        path: exchangeRateScreen,
+        name: 'exchange-rate',
+        builder: (context, state) => const ExchangeRateScreen(),
+      ),
+      GoRoute(
+        path: exchangeScreen,
+        name: 'exchange',
+        builder: (context, state) => const ExchangeScreen(),
+      ),
+      GoRoute(
+        path: interestScreen,
+        name: 'interest',
+        builder: (context, state) => const InterestScreen(),
       ),
     ],
   );
