@@ -38,6 +38,7 @@ class _SignInState extends State<SignIn> {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: Container(
         color: AppColors.primary1,
         child: Column(
