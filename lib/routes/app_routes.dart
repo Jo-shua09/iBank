@@ -29,7 +29,7 @@ class AppRouter {
   static const String branchScreen = '/search/branch';
   static const String exchangeRateScreen = '/search/exchange-rate';
   static const String exchangeScreen = '/search/exchange';
-  static const String interestScreen = '/search/interest';
+  static const String interestScreen = '/search/interest-rate';
 
   static final router = GoRouter(
     initialLocation: splash,
@@ -101,7 +101,7 @@ class AppRouter {
       ),
       GoRoute(
         path: interestScreen,
-        name: 'interest',
+        name: 'interest-rate',
         builder: (context, state) => const InterestScreen(),
       ),
     ],

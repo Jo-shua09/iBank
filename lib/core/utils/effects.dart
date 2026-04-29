@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class AppEffects {
-  static List<BoxShadow> dropShadowCard = [
+  static const List<BoxShadow> dropShadowCard = [
     BoxShadow(
-      color: const Color(0xFF3629B7).withOpacity(0.07),
+      color: Color(0x123629B7), // 0xFF3629B7 with 7% opacity
       blurRadius: 30,
-      offset: const Offset(0, 4),
+      offset: Offset(0, 4),
     ),
   ];
 
-  static List<BoxShadow> dropShadowCardSmall = [
+  static const List<BoxShadow> dropShadowCardSmall = [
     BoxShadow(
-      color: const Color(0xFF3629B7).withOpacity(0.07),
+      color: Color(0x123629B7), // 0xFF3629B7 with 7% opacity
       blurRadius: 30,
-      offset: const Offset(0, -5),
+      offset: Offset(0, -5),
     ),
   ];
 }

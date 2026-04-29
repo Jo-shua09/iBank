@@ -20,11 +20,17 @@ class CustomIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: SvgPicture.asset(
-        'assets/icons/$iconPath',
+      child: SizedBox(
         width: size,
         height: size,
-        // colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+        child: Center(
+          child: SvgPicture.asset(
+            'assets/icons/$iconPath',
+            width: size,
+            height: size,
+            // colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+          ),
+        ),
       ),
     );
   }

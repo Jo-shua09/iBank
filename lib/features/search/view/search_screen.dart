@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
+import 'package:ibank/core/utils/effects.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -77,14 +78,7 @@ class SearchScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            spreadRadius: 2,
-            offset: const Offset(0, 5),
-          ),
-        ],
+        boxShadow: AppEffects.dropShadowCard,
       ),
       child: ListTile(
         title: Text(
