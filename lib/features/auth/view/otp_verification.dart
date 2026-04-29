@@ -38,7 +38,6 @@ class _OtpVerificationState extends State<OtpVerification> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
             _topBarWidget(context),
             const SizedBox(height: 16),
             Container(

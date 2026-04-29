@@ -22,7 +22,7 @@ class _SignInState extends State<SignIn> {
     super.initState();
     _signInController = SignInController();
     _signInController.addListener(() {
-      setState(() {}); // Rebuilds the widget when controller notifies changes
+      setState(() {});
     });
   }
 
@@ -34,16 +34,19 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    // Manually get the height of the notch/status bar
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      backgroundColor: AppColors.primary1,
-      body: SafeArea(
+      body: Container(
+        color: AppColors.primary1,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(height: statusBarHeight),
             _topBarWidget(context),
-            const SizedBox(height: 16),
             Expanded(
               child: Container(
+                width: double.infinity,
                 decoration: const BoxDecoration(
                   color: AppColors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -88,7 +91,7 @@ class _SignInState extends State<SignIn> {
                         const SizedBox(height: 16),
                         TextFieldWidget(
                           controller: _signInController.passwordController,
-                          hintText: '',
+                          hintText: '••••••••',
                           labelText: 'Password',
                           password: true,
                           keyboardType: TextInputType.visiblePassword,
@@ -125,7 +128,6 @@ class _SignInState extends State<SignIn> {
                           alignment: Alignment.center,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 'Don\'t have an account?',
@@ -161,21 +163,18 @@ class _SignInState extends State<SignIn> {
   Widget _topBarWidget(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 50,
-      decoration: BoxDecoration(color: AppColors.primary1),
+      height: 70,
+      decoration: const BoxDecoration(color: AppColors.primary1),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           IconButton(
-            onPressed: () {
-              context.pop();
-            },
-            icon: Icon(
+            onPressed: () => context.pop(),
+            icon: const Icon(
               Icons.arrow_back_ios_new,
               color: AppColors.white,
               size: 16,
             ),
-            padding: EdgeInsets.zero,
           ),
           Text(
             'Sign In',

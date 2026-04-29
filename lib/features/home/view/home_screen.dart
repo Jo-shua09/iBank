@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Required for status bar styling
+import 'package:flutter/services.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/utils/effects.dart';
@@ -33,106 +33,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // This makes the status bar text/icons white
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.light, // For Android
-        statusBarBrightness: Brightness.dark, // For iOS
-      ),
-    );
+    // Ensure the status bar icons are white on every build
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
     return Scaffold(
-      backgroundColor: AppColors.primary1, // Ensures the background is blue
+      backgroundColor: AppColors.white, // Match the bottom section
       body: IndexedStack(
         index: _currentIndex,
         children: [
-          // HOME TAB
-          Column(
-            children: [
-              // TOP BLUE SECTION - This now covers the status bar area
-              Container(
-                color: AppColors.primary1,
-                child: SafeArea(
-                  bottom:
-                      false, 
-                  child: _topBarWidget(context),
-                ),
-              ),
-              const SizedBox(height: 16),
-              // WHITE BODY SECTION
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 32.0),
-                  decoration: const BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(24),
-                    ),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(
-                          'assets/images/stack-cards.png',
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                        ),
-                        const SizedBox(height: 32),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: menuItems.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                mainAxisSpacing: 4,
-                                crossAxisSpacing: 0,
-                                childAspectRatio: 1,
-                              ),
-                          itemBuilder: (context, index) {
-                            final item = menuItems[index];
-                            return GestureDetector(
-                              onTap: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  padding: const EdgeInsets.all(12.0),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.white,
-                                    borderRadius: BorderRadius.circular(16),
-                                    boxShadow: AppEffects.dropShadowCard,
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CustomIconWidget(iconPath: item['icon']!),
-                                      const SizedBox(height: 12),
-                                      Text(
-                                        item['title']!,
-                                        textAlign: TextAlign.center,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: AppTextStyles.caption1.copyWith(
-                                          color: AppColors.neutral2,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          _buildHomeTab(),
           const SearchScreen(),
           const NotificationScreen(),
           const SettingsScreen(),
@@ -149,21 +58,115 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget _buildHomeTab() {
+    return Column(
+      children: [
+        // --- TOP BLUE SECTION (COVERING STATUS BAR) ---
+        Container(
+          width: double.infinity,
+          color: AppColors.primary1,
+          child: Column(
+            children: [
+              // This pushes content below the notch while keeping background blue
+              SizedBox(height: MediaQuery.of(context).padding.top),
+              _topBarWidget(context),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ),
+
+        // --- WHITE BODY SECTION ---
+        Expanded(
+          child: Container(
+            // Use a Stack to maintain the blue background color behind the rounded corners
+            color: AppColors.primary1,
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+              decoration: const BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+              ),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      'assets/images/stack-cards.png',
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                    const SizedBox(height: 32),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.only(bottom: 32),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: menuItems.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 16,
+                            crossAxisSpacing: 12,
+                            childAspectRatio: 0.85,
+                          ),
+                      itemBuilder: (context, index) {
+                        final item = menuItems[index];
+                        return _buildMenuItem(item);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMenuItem(Map<String, String> item) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        padding: const EdgeInsets.all(12.0),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: AppEffects.dropShadowCard,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomIconWidget(iconPath: item['icon']!),
+            const SizedBox(height: 8),
+            Text(
+              item['title']!,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppTextStyles.caption1.copyWith(
+                color: AppColors.neutral2,
+                fontWeight: FontWeight.w400,
+                fontSize: 11,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _topBarWidget(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-      decoration: const BoxDecoration(color: AppColors.primary1),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          GestureDetector(
-            onTap: () {},
-            child: const CircleAvatar(
-              radius: 24,
-              backgroundColor: Colors.white24, // Subtle placeholder
-              backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=john'),
-            ),
+          const CircleAvatar(
+            radius: 24,
+            backgroundColor: Colors.white24,
+            backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=john'),
           ),
           const SizedBox(width: 12),
           RichText(

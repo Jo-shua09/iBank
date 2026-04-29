@@ -21,7 +21,7 @@ class _SignUpState extends State<SignUp> {
     super.initState();
     _signUpController = SignUpController();
     _signUpController.addListener(() {
-      setState(() {}); // Rebuilds the widget when controller notifies changes
+      setState(() {});
     });
   }
 
@@ -33,30 +33,28 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      backgroundColor: AppColors.primary1,
-      body: SafeArea(
+      body: Container(
+        color: AppColors.primary1,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _topBarWidget(
-              context,
-            ), // Renamed from _topBarWidget to accept context
-            const SizedBox(height: 16),
+            SizedBox(height: statusBarHeight),
+            _topBarWidget(context),
             Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  constraints: BoxConstraints(
-                    minHeight: MediaQuery.of(context).size.height,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(24),
-                    ),
-                  ),
+              child: Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                ),
+                child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                      vertical: 30.0,
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,7 +84,6 @@ class _SignUpState extends State<SignUp> {
                           controller: _signUpController.fullNameController,
                           hintText: 'John Doe',
                           labelText: 'Full Name',
-                          keyboardType: TextInputType.text,
                         ),
                         const SizedBox(height: 16),
                         TextFieldWidget(
@@ -98,48 +95,35 @@ class _SignUpState extends State<SignUp> {
                         const SizedBox(height: 16),
                         TextFieldWidget(
                           controller: _signUpController.passwordController,
-                          hintText: '',
+                          hintText: '••••••••',
                           labelText: 'Password',
                           password: true,
-                          keyboardType: TextInputType.visiblePassword,
                         ),
                         const SizedBox(height: 16),
                         TextFieldWidget(
                           controller:
                               _signUpController.confirmPasswordController,
-                          hintText: '',
                           labelText: 'Confirm Password',
                           password: true,
-                          keyboardType: TextInputType.visiblePassword,
+                          hintText: '••••••••',
                         ),
                         const SizedBox(height: 8),
                         Row(
                           children: [
                             Checkbox.adaptive(
                               activeColor: AppColors.primary1,
-                              checkColor: AppColors.primary1,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-
-                              side: BorderSide(
-                                width: .9,
-                                color: AppColors.neutral4,
-                              ),
                               value: _signUpController.isChecked,
                               onChanged: (bool? value) {
                                 _signUpController.toggleCheckbox(value);
                               },
                             ),
-                            const SizedBox(width: 4),
                             Expanded(
                               child: RichText(
                                 text: TextSpan(
-                                  style: AppTextStyles.body2,
                                   children: [
                                     TextSpan(
                                       text:
-                                          'By creating an account your aggree to our ',
+                                          'By creating an account your agree to our ',
                                       style: AppTextStyles.caption1.copyWith(
                                         color: AppColors.neutral1,
                                       ),
@@ -168,7 +152,6 @@ class _SignUpState extends State<SignUp> {
                           alignment: Alignment.center,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
                                 'Have an account?',
@@ -204,21 +187,18 @@ class _SignUpState extends State<SignUp> {
   Widget _topBarWidget(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 50,
-      decoration: BoxDecoration(color: AppColors.primary1),
+      height: 70,
+      decoration: const BoxDecoration(color: AppColors.primary1),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           IconButton(
-            onPressed: () {
-              context.pop();
-            },
-            icon: Icon(
+            onPressed: () => context.pop(),
+            icon: const Icon(
               Icons.arrow_back_ios_new,
               color: AppColors.white,
               size: 16,
             ),
-            padding: EdgeInsets.zero,
           ),
           Text(
             'Sign Up',

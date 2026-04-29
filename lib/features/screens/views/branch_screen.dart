@@ -22,7 +22,7 @@ class BranchScreen extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 500,
+                    height: 700,
                     color: AppColors.primary1,
                     child: Text('Map Integration coming soon'),
                   ),
