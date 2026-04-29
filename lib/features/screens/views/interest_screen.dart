@@ -15,7 +15,6 @@ class InterestScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
             _topBarWidget(context),
             const SizedBox(height: 8),
             // TABLE HEADER
@@ -59,59 +58,60 @@ class InterestScreen extends StatelessWidget {
 
             const SizedBox(height: 16),
             // TABLE ROW
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: rates.length,
-              separatorBuilder: (context, index) => Divider(
-                height: 32,
-                thickness: 1,
-                color: AppColors.neutral5,
-                indent: 20,
-                endIndent: 20,
+            Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.only(bottom: 32),
+                itemCount: rates.length,
+                separatorBuilder: (context, index) => Divider(
+                  height: 32,
+                  thickness: 1,
+                  color: AppColors.neutral5,
+                  indent: 20,
+                  endIndent: 20,
+                ),
+                itemBuilder: (context, index) {
+                  final item = rates[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        // INTEREST KIND
+                        Expanded(
+                          flex: 3,
+                          child: Text(
+                            item.kind,
+                            style: AppTextStyles.body3.copyWith(
+                              color: AppColors.neutral1,
+                            ),
+                          ),
+                        ),
+                        // DEPOSIT
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            item.deposit,
+                            style: AppTextStyles.body2.copyWith(
+                              color: AppColors.neutral1,
+                            ),
+                          ),
+                        ),
+                        // RATE
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                            textAlign: TextAlign.center,
+                            item.rate,
+                            style: AppTextStyles.body2.copyWith(
+                              color: AppColors.primary1,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
-              itemBuilder: (context, index) {
-                final item = rates[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      // INTEREST KIND
-                      Expanded(
-                        flex: 3,
-                        child: Text(
-                          item.kind,
-                          style: AppTextStyles.body3.copyWith(
-                            color: AppColors.neutral1,
-                          ),
-                        ),
-                      ),
-                      // DEPOSIT
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          item.deposit,
-                          style: AppTextStyles.body2.copyWith(
-                            color: AppColors.neutral1,
-                          ),
-                        ),
-                      ),
-                      // RATE
-                      Expanded(
-                        flex: 1,
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          item.rate,
-                          style: AppTextStyles.body2.copyWith(
-                            color: AppColors.primary1,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
             ),
           ],
         ),

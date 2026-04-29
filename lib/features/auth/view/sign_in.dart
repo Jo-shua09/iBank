@@ -40,7 +40,6 @@ class _SignInState extends State<SignIn> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
             _topBarWidget(context),
             const SizedBox(height: 16),
             Expanded(

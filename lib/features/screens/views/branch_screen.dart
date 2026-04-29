@@ -15,7 +15,6 @@ class BranchScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
             _topBarWidget(context),
             const SizedBox(height: 8),
             Expanded(

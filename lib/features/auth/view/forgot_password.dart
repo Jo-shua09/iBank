@@ -39,7 +39,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
             _topBarWidget(context),
             const SizedBox(height: 16),
             Container(

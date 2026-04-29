@@ -39,7 +39,6 @@ class _SignUpState extends State<SignUp> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
             _topBarWidget(
               context,
             ), // Renamed from _topBarWidget to accept context

@@ -17,7 +17,6 @@ class SearchScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 16),
               Text(
                 'Search',
                 style: AppTextStyles.body1.copyWith(color: AppColors.neutral1),

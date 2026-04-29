@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/data/dummy_data.dart';
+import 'package:ibank/core/utils/flag_utils.dart';
 
 class ExchangeRateScreen extends StatelessWidget {
   const ExchangeRateScreen({super.key});
@@ -15,7 +16,6 @@ class ExchangeRateScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 16),
             _topBarWidget(context),
             const SizedBox(height: 8),
             // TABLE HEADER
@@ -60,6 +60,7 @@ class ExchangeRateScreen extends StatelessWidget {
             // TABLE ROW
             Expanded(
               child: ListView.separated(
+                padding: const EdgeInsets.only(bottom: 32),
                 itemCount: exchangeRates.length,
                 separatorBuilder: (context, index) => Divider(
                   height: 32,
@@ -80,7 +81,7 @@ class ExchangeRateScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                item.countryCode,
+                                getFlagEmoji(item.countryCode),
                                 style: const TextStyle(fontSize: 20),
                               ),
                               const SizedBox(width: 8),
