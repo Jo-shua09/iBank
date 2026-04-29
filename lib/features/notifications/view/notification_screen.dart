@@ -17,7 +17,7 @@ class NotificationScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                'Messages',
+                'Notifications',
                 style: AppTextStyles.body1.copyWith(color: AppColors.neutral1),
               ),
               const SizedBox(height: 16),
