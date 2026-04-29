@@ -7,10 +7,10 @@ import 'package:ibank/features/auth/view/success_screen.dart';
 import 'package:ibank/features/home/view/home_screen.dart';
 import 'package:ibank/features/notifications/view/notification_screen.dart';
 import 'package:ibank/features/search/view/search_screen.dart';
-import 'package:ibank/features/searches/views/branch_screen.dart';
-import 'package:ibank/features/searches/views/exchange_rate_screen.dart';
-import 'package:ibank/features/searches/views/exchange_screen.dart';
-import 'package:ibank/features/searches/views/interest_screen.dart';
+import 'package:ibank/features/screens/views/branch_screen.dart';
+import 'package:ibank/features/screens/views/exchange_rate_screen.dart';
+import 'package:ibank/features/screens/views/exchange_screen.dart';
+import 'package:ibank/features/screens/views/interest_screen.dart';
 import 'package:ibank/features/settings/view/settings_screen.dart';
 import 'package:ibank/features/splash_screen.dart';
 
