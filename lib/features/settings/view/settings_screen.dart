@@ -41,7 +41,7 @@ class SettingsScreen extends StatelessWidget {
                           height: 60,
                         ), // Space for the overlapping image
                         Text(
-                          'John Doe',
+                          'John Smith',
                           style: AppTextStyles.body1.copyWith(
                             fontWeight: FontWeight.w700,
                           ),
