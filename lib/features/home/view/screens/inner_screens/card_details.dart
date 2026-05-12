@@ -52,7 +52,7 @@ class CardDetails extends StatelessWidget {
                       ),
                     ),
                     trailing: Text(
-                      {'${cardType == 'blueCard' ? '122222' : '11111'}'},
+                      cardType == 'blueCard' ? '122222' : '11111',
                       style: AppTextStyles.caption2.copyWith(
                         color: AppColors.primary1,
                         fontWeight: FontWeight.w700,
