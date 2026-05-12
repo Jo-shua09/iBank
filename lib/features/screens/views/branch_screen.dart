@@ -9,12 +9,15 @@ class BranchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            SizedBox(height: statusBarHeight),
             _topBarWidget(context),
             const SizedBox(height: 8),
             Expanded(

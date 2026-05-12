@@ -7,13 +7,15 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Container(
         color: AppColors.primary1,
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            SizedBox(height: statusBarHeight),
             Text(
               'Settings',
               style: AppTextStyles.body1.copyWith(color: AppColors.white),

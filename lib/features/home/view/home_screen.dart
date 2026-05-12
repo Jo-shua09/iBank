@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/utils/effects.dart';
@@ -126,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildMenuItem(Map<String, String> item) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () =>
+          context.push('/${item['title']!.toLowerCase().replaceAll(' ', '-')}'),
       child: Container(
         padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(

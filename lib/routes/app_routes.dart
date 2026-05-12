@@ -5,6 +5,15 @@ import 'package:ibank/features/auth/view/sign_in.dart';
 import 'package:ibank/features/auth/view/sign_up.dart';
 import 'package:ibank/features/auth/view/success_screen.dart';
 import 'package:ibank/features/home/view/home_screen.dart';
+import 'package:ibank/features/home/view/screens/account_and_card.dart';
+import 'package:ibank/features/home/view/screens/beneficiary.dart';
+import 'package:ibank/features/home/view/screens/credit_card.dart';
+import 'package:ibank/features/home/view/screens/inner_screens/card_details.dart';
+import 'package:ibank/features/home/view/screens/mobile_prepaid.dart';
+import 'package:ibank/features/home/view/screens/save_online.dart';
+import 'package:ibank/features/home/view/screens/transaction_report.dart';
+import 'package:ibank/features/home/view/screens/transfer.dart';
+import 'package:ibank/features/home/view/screens/withdraw.dart';
 import 'package:ibank/features/notifications/view/notification_screen.dart';
 import 'package:ibank/features/search/view/search_screen.dart';
 import 'package:ibank/features/screens/views/branch_screen.dart';
@@ -30,6 +39,16 @@ class AppRouter {
   static const String exchangeRateScreen = '/search/exchange-rate';
   static const String exchangeScreen = '/search/exchange';
   static const String interestScreen = '/search/interest-rate';
+  static const String transactionReport = '/transaction-report';
+  static const String accountAndCard = '/account-and-card';
+  static const String transfer = '/transfer';
+  static const String withdraw = '/withdraw';
+  static const String mobilePrepaid = '/mobile-prepaid';
+  static const String payBills = '/pay-bills';
+  static const String saveOnline = '/save-online';
+  static const String creditCard = '/credit-card';
+  static const String beneficiary = '/beneficiary';
+  static const String cardDetails = '/card-details';
 
   static final router = GoRouter(
     initialLocation: splash,
@@ -103,6 +122,54 @@ class AppRouter {
         path: interestScreen,
         name: 'interest-rate',
         builder: (context, state) => const InterestScreen(),
+      ),
+      GoRoute(
+        path: transactionReport,
+        name: 'transaction-report',
+        builder: (context, state) => const TransactionReport(),
+      ),
+      GoRoute(
+        path: creditCard,
+        name: 'credit-card',
+        builder: (context, state) => const CreditCard(),
+      ),
+      GoRoute(
+        path: beneficiary,
+        name: 'beneficiary',
+        builder: (context, state) => const Beneficiary(),
+      ),
+      GoRoute(
+        path: mobilePrepaid,
+        name: 'mobile-prepaid',
+        builder: (context, state) => const MobilePrepaid(),
+      ),
+      GoRoute(
+        path: saveOnline,
+        name: 'save-online',
+        builder: (context, state) => const SaveOnline(),
+      ),
+      GoRoute(
+        path: transfer,
+        name: 'transfer',
+        builder: (context, state) => const Transfer(),
+      ),
+      GoRoute(
+        path: withdraw,
+        name: 'withdraw',
+        builder: (context, state) => const Withdraw(),
+      ),
+      GoRoute(
+        path: accountAndCard,
+        name: 'account-and-card',
+        builder: (context, state) => const AccountAndCard(),
+      ),
+      GoRoute(
+        path: cardDetails,
+        name: 'card-details',
+        builder: (context, state) {
+          final cardType = state.extra as String?;
+          return CardDetails(cardType: cardType);
+        },
       ),
     ],
   );
