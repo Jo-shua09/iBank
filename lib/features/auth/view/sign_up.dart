@@ -7,7 +7,7 @@ import 'package:ibank/core/widgets/button_widget.dart';
 import 'package:ibank/core/widgets/text_field_widget.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+  const SignUp({super.key});
 
   @override
   State<SignUp> createState() => _SignUpState();

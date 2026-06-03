@@ -256,7 +256,7 @@ class _AccountAndCardState extends State<AccountAndCard> {
           Row(
             children: [
               Text(
-                'Account ${account}',
+                'Account $account',
                 style: AppTextStyles.body3.copyWith(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
@@ -264,7 +264,7 @@ class _AccountAndCardState extends State<AccountAndCard> {
               ),
               const Spacer(),
               Text(
-                '${accountNumber}',
+                '$accountNumber',
                 style: AppTextStyles.body3.copyWith(
                   color: Colors.black,
                   fontWeight: FontWeight.w700,
@@ -305,7 +305,7 @@ class _AccountAndCardState extends State<AccountAndCard> {
               ),
               const Spacer(),
               Text(
-                '${branch}',
+                branch,
                 style: AppTextStyles.body3.copyWith(
                   color: AppColors.primary1,
                   fontWeight: FontWeight.w800,

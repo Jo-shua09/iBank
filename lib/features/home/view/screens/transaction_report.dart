@@ -1,3 +1,7 @@
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
@@ -224,7 +228,7 @@ class TransactionReport extends StatelessWidget {
             ),
           ),
           trailing: Text(
-            '${inOrOut.isEmpty ? '+' : '-'}\$${amount}',
+            '${inOrOut.isEmpty ? '+' : '-'}\$$amount',
             style: AppTextStyles.caption2.copyWith(
               color: colour,
               fontWeight: FontWeight.bold,
