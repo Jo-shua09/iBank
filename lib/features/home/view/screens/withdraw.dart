@@ -146,7 +146,7 @@ class Withdraw extends StatelessWidget {
                     isActive: true,
                     onPressed: () => context.goNamed('withdraw-success'),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 42),
                 ],
               ),
             ),
