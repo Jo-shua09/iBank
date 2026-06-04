@@ -107,25 +107,6 @@ class _MobilePrepaidState extends State<MobilePrepaid> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Text(
-                        'Available Balance',
-                        style: AppTextStyles.caption1.copyWith(
-                          color: AppColors.primary1,
-                        ),
-                      ),
-                      const SizedBox(width: 5),
-                      Text(
-                        '\$10,000.0',
-                        style: AppTextStyles.body3.copyWith(
-                          color: AppColors.neutral1,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
                   const SizedBox(height: 16),
                   Row(
                     children: [
