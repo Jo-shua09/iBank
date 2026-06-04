@@ -9,6 +9,7 @@ import 'package:ibank/features/home/view/screens/account_and_card.dart';
 import 'package:ibank/features/home/view/screens/beneficiary.dart';
 import 'package:ibank/features/home/view/screens/credit_card.dart';
 import 'package:ibank/features/home/view/screens/inner_screens/card_details.dart';
+import 'package:ibank/features/home/view/screens/inner_screens/confirm_mobile_prepaid.dart';
 import 'package:ibank/features/home/view/screens/inner_screens/withdraw_success.dart';
 import 'package:ibank/features/home/view/screens/mobile_prepaid.dart';
 import 'package:ibank/features/home/view/screens/save_online.dart';
@@ -51,6 +52,7 @@ class AppRouter {
   static const String beneficiary = '/beneficiary';
   static const String cardDetails = '/card-details';
   static const String withdrawSuccess = '/withdraw-success';
+  static const String confirmPrepaid = '/confirm-prepaid';
 
   static final router = GoRouter(
     initialLocation: splash,
@@ -169,6 +171,11 @@ class AppRouter {
         path: withdrawSuccess,
         name: 'withdraw-success',
         builder: (context, state) => const WithdrawSuccess(),
+      ),
+      GoRoute(
+        path: confirmPrepaid,
+        name: 'confirm-prepaid',
+        builder: (context, state) => const ConfirmMobilePrepaid(),
       ),
       GoRoute(
         path: cardDetails,
