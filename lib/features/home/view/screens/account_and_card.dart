@@ -102,8 +102,8 @@ class _AccountAndCardState extends State<AccountAndCard> {
 
                   //TABS CONTENTS
                   if (currentTab == 'account')
-                    SingleChildScrollView(
-                      child: Column(
+                    Expanded(
+                      child: ListView(
                         children: [
                           Center(
                             child: CircleAvatar(
@@ -153,9 +153,8 @@ class _AccountAndCardState extends State<AccountAndCard> {
                     ),
 
                   if (currentTab == 'card')
-                    SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
+                    Expanded(
+                      child: ListView(
                         children: [
                           GestureDetector(
                             onTap: () => context.push(

@@ -4,8 +4,17 @@ import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 
-class Withdraw extends StatelessWidget {
+class Withdraw extends StatefulWidget {
   const Withdraw({super.key});
+
+  @override
+  State<Withdraw> createState() => _WithdrawState();
+}
+
+class _WithdrawState extends State<Withdraw> {
+  String? selectedAccountName;
+  String? selectedAccountBalance;
+  IconData? selectedAccountIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -21,134 +30,159 @@ class Withdraw extends StatelessWidget {
           _topBarWidget(context),
           const SizedBox(height: 16),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Image(
-                      width: 300,
-                      fit: BoxFit.cover,
-                      image: AssetImage('assets/images/illustration-4.jpg'),
-                    ),
-                  ),
-                  const SizedBox(height: 64),
-                  DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      hintText: 'Choose account/card',
-                      hintStyle: AppTextStyles.caption2.copyWith(
-                        color: AppColors.neutral4,
-                        fontSize: 10,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.neutral4),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.primary1,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.semanticRed,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    items: [
-                      DropdownMenuItem(
-                        value: 'account1',
-                        child: Text(
-                          'Account 1',
-                          style: AppTextStyles.caption2.copyWith(
-                            color: AppColors.neutral3,
+            child: CustomScrollView(
+              slivers: [
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Image(
+                            width: 300,
+                            fit: BoxFit.cover,
+                            image: AssetImage(
+                              'assets/images/illustration-4.jpg',
+                            ),
                           ),
                         ),
-                      ),
-                      DropdownMenuItem(
-                        value: 'account2',
-                        child: Text(
-                          'Account 2',
-                          style: AppTextStyles.caption2.copyWith(
-                            color: AppColors.neutral3,
+                        const SizedBox(height: 64),
+                        GestureDetector(
+                          onTap: () async {
+                            final result =
+                                await showDialog<Map<String, dynamic>>(
+                                  context: context,
+                                  builder: (context) =>
+                                      _selectAccountDialog(context),
+                                );
+                            if (result != null) {
+                              setState(() {
+                                selectedAccountName = result['name'];
+                                selectedAccountBalance = result['balance'];
+                                selectedAccountIcon = result['icon'];
+                              });
+                            }
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: AppColors.neutral4),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  selectedAccountIcon ??
+                                      Icons.account_balance_wallet,
+                                  color: AppColors.primary1,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    selectedAccountName ??
+                                        'Choose account/card',
+                                    style: AppTextStyles.caption2.copyWith(
+                                      color: selectedAccountName != null
+                                          ? AppColors.neutral1
+                                          : AppColors.neutral4,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                if (selectedAccountBalance != null) ...[
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    selectedAccountBalance!,
+                                    style: AppTextStyles.caption2.copyWith(
+                                      color: AppColors.primary1,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
+                                const SizedBox(width: 8),
+                                const Icon(
+                                  Icons.keyboard_arrow_down,
+                                  color: AppColors.neutral3,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                    onChanged: (String? value) {
-                      // Handle the change when the user selects a new item
-                    },
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: 'Phone number',
-                      hintStyle: AppTextStyles.caption2.copyWith(
-                        color: AppColors.neutral4,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.neutral4),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.primary1,
-                          width: 1.5,
+                        const SizedBox(height: 16),
+                        TextField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: 'Phone number',
+                            hintStyle: AppTextStyles.caption2.copyWith(
+                              color: AppColors.neutral4,
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: AppColors.neutral4),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.primary1,
+                                width: 1.5,
+                              ),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.semanticRed,
+                                width: 1.5,
+                              ),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.semanticRed,
-                          width: 1.5,
+                        const SizedBox(height: 16),
+                        TextField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: 'Amount',
+                            hintStyle: AppTextStyles.caption2.copyWith(
+                              color: AppColors.neutral4,
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(color: AppColors.neutral4),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.primary1,
+                                width: 1.5,
+                              ),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppColors.semanticRed,
+                                width: 1.5,
+                              ),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
+                        const Spacer(),
+                        ButtonWidget(
+                          buttonText: 'Verify',
+                          isActive: true,
+                          onPressed: () => context.goNamed('withdraw-success'),
+                        ),
+                        const SizedBox(height: 42),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: 'Amount',
-                      hintStyle: AppTextStyles.caption2.copyWith(
-                        color: AppColors.neutral4,
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: AppColors.neutral4),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.primary1,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.semanticRed,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  ButtonWidget(
-                    buttonText: 'Verify',
-                    isActive: true,
-                    onPressed: () => context.goNamed('withdraw-success'),
-                  ),
-                  const SizedBox(height: 42),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ],
@@ -177,6 +211,90 @@ class Withdraw extends StatelessWidget {
             style: AppTextStyles.body1.copyWith(color: AppColors.neutral1),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _selectAccountDialog(BuildContext context) {
+    final accounts = [
+      {
+        'name': 'Main Account (...1234)',
+        'balance': '\$12,000.00',
+        'icon': Icons.account_balance,
+      },
+      {
+        'name': 'Visa Card (...5678)',
+        'balance': '\$8,500.00',
+        'icon': Icons.credit_card,
+      },
+    ];
+
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Text(
+                'Select account/card',
+                style: AppTextStyles.body1.copyWith(color: AppColors.neutral1),
+              ),
+            ),
+            const SizedBox(height: 16),
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: accounts.length,
+              separatorBuilder: (context, index) =>
+                  const Divider(color: AppColors.neutral5, height: 1),
+              itemBuilder: (context, index) {
+                final account = accounts[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context, account);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          account['icon'] as IconData,
+                          color: AppColors.primary1,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            account['name'] as String,
+                            style: AppTextStyles.body3.copyWith(
+                              color: AppColors.neutral1,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          account['balance'] as String,
+                          style: AppTextStyles.body3.copyWith(
+                            color: AppColors.primary1,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
