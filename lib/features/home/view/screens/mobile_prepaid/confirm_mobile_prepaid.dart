@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
-import 'package:ibank/features/home/view/screens/inner_screens/successful_screen.dart';
+import 'package:ibank/features/home/view/screens/common/successful_screen.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 
 class ConfirmMobilePrepaid extends StatelessWidget {
@@ -183,9 +183,10 @@ class ConfirmMobilePrepaid extends StatelessWidget {
                   ButtonWidget(
                     buttonText: 'Confirm',
                     isActive: true,
-                    onPressed: () => context.go(
-                      '/success',
+                    onPressed: () => context.pushNamed(
+                      'success',
                       extra: SuccessfulScreen(
+                        imagePath: 'assets/images/illustration-2.jpg',
                         text: 'Mobile Prepaid Successful!',
                         description:
                             'You have successfully topped up your mobile. Thanks for using iBank.',
