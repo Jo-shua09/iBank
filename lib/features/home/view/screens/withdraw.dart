@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
+import 'package:ibank/features/home/view/screens/inner_screens/successful_screen.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 
 class Withdraw extends StatefulWidget {
@@ -175,7 +176,15 @@ class _WithdrawState extends State<Withdraw> {
                         ButtonWidget(
                           buttonText: 'Verify',
                           isActive: true,
-                          onPressed: () => context.goNamed('withdraw-success'),
+                          onPressed: () => context.go(
+                            '/success',
+                            extra: SuccessfulScreen(
+                              text: 'Withdrawal Successful!',
+                              description:
+                                  'You have successfully withdrawn money! Please check the balance in the card management section.',
+                              buttonText: 'Go to Home',
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 42),
                       ],

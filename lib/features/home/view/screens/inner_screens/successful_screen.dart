@@ -4,9 +4,22 @@ import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 
-class WithdrawSuccess extends StatelessWidget {
-  const WithdrawSuccess({super.key});
+class SuccessfulScreen extends StatelessWidget {
+  final String text;
+  final String description;
+  final String? imagePath;
+  final VoidCallback? onButtonPressed;
+  final String? buttonText;
+  const SuccessfulScreen({
+    super.key,
+    required this.text,
+    required this.description,
+    this.imagePath,
+    this.onButtonPressed,
+    this.buttonText,
+  });
 
+  @override
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
@@ -28,12 +41,14 @@ class WithdrawSuccess extends StatelessWidget {
                     child: Image(
                       width: 300,
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/images/illustration-4.jpg'),
+                      image: AssetImage(
+                        imagePath ?? 'assets/images/illustration-4.jpg',
+                      ),
                     ),
                   ),
                   const SizedBox(height: 32),
                   Text(
-                    'Withdrawal Successful!',
+                    text,
                     style: AppTextStyles.body1.copyWith(
                       color: AppColors.primary1,
                       fontWeight: FontWeight.w600,
@@ -43,16 +58,16 @@ class WithdrawSuccess extends StatelessWidget {
                   Text(
                     overflow: TextOverflow.visible,
                     textAlign: TextAlign.center,
-                    'You have successfully withdrawn money! Please check the balance in the card management section.',
+                    description,
                     style: AppTextStyles.caption1.copyWith(
                       color: AppColors.neutral1,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const Spacer(),
                   ButtonWidget(
-                    buttonText: 'Continue',
+                    buttonText: buttonText ?? 'Continue',
                     isActive: true,
-                    onPressed: () => context.goNamed('home'),
+                    onPressed: onButtonPressed ?? () => context.goNamed('home'),
                   ),
                 ],
               ),

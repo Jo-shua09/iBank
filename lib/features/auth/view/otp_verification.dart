@@ -125,7 +125,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                     ButtonWidget(
                       isActive: _isFieldActive,
                       buttonText: 'Change Password',
-                      onPressed: () => context.pushNamed('success'),
+                      onPressed: () => context.pushNamed('successs'),
                     ),
                   ],
                 ),

@@ -10,7 +10,7 @@ import 'package:ibank/features/home/view/screens/beneficiary.dart';
 import 'package:ibank/features/home/view/screens/credit_card.dart';
 import 'package:ibank/features/home/view/screens/inner_screens/card_details.dart';
 import 'package:ibank/features/home/view/screens/inner_screens/confirm_mobile_prepaid.dart';
-import 'package:ibank/features/home/view/screens/inner_screens/withdraw_success.dart';
+import 'package:ibank/features/home/view/screens/inner_screens/successful_screen.dart';
 import 'package:ibank/features/home/view/screens/mobile_prepaid.dart';
 import 'package:ibank/features/home/view/screens/save_online.dart';
 import 'package:ibank/features/home/view/screens/transaction_report.dart';
@@ -51,7 +51,7 @@ class AppRouter {
   static const String creditCard = '/credit-card';
   static const String beneficiary = '/beneficiary';
   static const String cardDetails = '/card-details';
-  static const String withdrawSuccess = '/withdraw-success';
+  static const String successfulScreen = '/success';
   static const String confirmPrepaid = '/confirm-prepaid';
 
   static final router = GoRouter(
@@ -84,7 +84,7 @@ class AppRouter {
       ),
       GoRoute(
         path: successScreen,
-        name: 'success',
+        name: 'successs',
         builder: (context, state) => const SuccessScreen(),
       ),
       GoRoute(
@@ -168,9 +168,16 @@ class AppRouter {
         builder: (context, state) => const AccountAndCard(),
       ),
       GoRoute(
-        path: withdrawSuccess,
-        name: 'withdraw-success',
-        builder: (context, state) => const WithdrawSuccess(),
+        path: successfulScreen,
+        name: 'success',
+        builder: (context, state) {
+          final successfulScreen = state.extra as SuccessfulScreen?;
+          return successfulScreen ??
+              const SuccessfulScreen(
+                text: "Success",
+                description: "The operation was successful.",
+              );
+        },
       ),
       GoRoute(
         path: confirmPrepaid,

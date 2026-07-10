@@ -273,9 +273,9 @@ class _MobilePrepaidState extends State<MobilePrepaid> {
                   ),
                   const Spacer(),
                   ButtonWidget(
-                    buttonText: 'Confirm',
+                    buttonText: 'Continue',
                     isActive: true,
-                    onPressed: () {},
+                    onPressed: () => context.pushNamed('confirm-prepaid'),
                   ),
                   const SizedBox(height: 42),
                 ],
