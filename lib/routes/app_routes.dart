@@ -13,15 +13,16 @@ import 'package:ibank/features/home/view/screens/mobile_prepaid/confirm_mobile_p
 import 'package:ibank/features/home/view/screens/common/successful_screen.dart';
 import 'package:ibank/features/home/view/screens/mobile_prepaid/mobile_prepaid.dart';
 import 'package:ibank/features/home/view/screens/save_online.dart';
+import 'package:ibank/features/home/view/screens/pay_bill/pay_bills.dart';
 import 'package:ibank/features/home/view/screens/transaction_report.dart';
 import 'package:ibank/features/home/view/screens/transfer.dart';
 import 'package:ibank/features/home/view/screens/withdraw.dart';
 import 'package:ibank/features/notifications/view/notification_screen.dart';
 import 'package:ibank/features/search/view/search_screen.dart';
-import 'package:ibank/features/screens/views/branch_screen.dart';
-import 'package:ibank/features/screens/views/exchange_rate_screen.dart';
-import 'package:ibank/features/screens/views/exchange_screen.dart';
-import 'package:ibank/features/screens/views/interest_screen.dart';
+import 'package:ibank/features/search/screens/branch_screen.dart';
+import 'package:ibank/features/search/screens/exchange_rate_screen.dart';
+import 'package:ibank/features/search/screens/exchange_screen.dart';
+import 'package:ibank/features/search/screens/interest_screen.dart';
 import 'package:ibank/features/settings/view/settings_screen.dart';
 import 'package:ibank/features/splash_screen.dart';
 
@@ -191,6 +192,11 @@ class AppRouter {
           final cardType = state.extra as String?;
           return CardDetails(cardType: cardType);
         },
+      ),
+      GoRoute(
+        path: payBills,
+        name: 'pay-bills',
+        builder: (context, state) => const PayBills(),
       ),
     ],
   );
