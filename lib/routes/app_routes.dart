@@ -12,7 +12,7 @@ import 'package:ibank/features/home/view/screens/account_and_card/card_details.d
 import 'package:ibank/features/home/view/screens/mobile_prepaid/confirm_mobile_prepaid.dart';
 import 'package:ibank/features/home/view/screens/common/successful_screen.dart';
 import 'package:ibank/features/home/view/screens/mobile_prepaid/mobile_prepaid.dart';
-import 'package:ibank/features/home/view/screens/save_online.dart';
+import 'package:ibank/features/home/view/screens/save_online/save_online.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/pay_bills.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/payment_history_screen.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/bill_payment_details_screen.dart';
