@@ -14,6 +14,7 @@ import 'package:ibank/features/home/view/screens/common/successful_screen.dart';
 import 'package:ibank/features/home/view/screens/mobile_prepaid/mobile_prepaid.dart';
 import 'package:ibank/features/home/view/screens/save_online.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/pay_bills.dart';
+import 'package:ibank/features/home/view/screens/pay_bill/bill_payment_details_screen.dart';
 import 'package:ibank/features/home/view/screens/transaction_report.dart';
 import 'package:ibank/features/home/view/screens/transfer.dart';
 import 'package:ibank/features/home/view/screens/withdraw.dart';
@@ -27,30 +28,42 @@ import 'package:ibank/features/settings/view/settings_screen.dart';
 import 'package:ibank/features/splash_screen.dart';
 
 class AppRouter {
-  // String constants to prevent typos across the app
+  // --- CORE ---
   static const String splash = '/';
+
+  // --- AUTHENTICATION ---
   static const String signIn = '/sign-in';
   static const String signUp = '/sign-up';
   static const String forgotPassword = '/forgot-password';
   static const String otpVerification = '/otp-verification';
   static const String successScreen = '/success-screen';
+
+  // --- MAIN SCREENS (BOTTOM NAVIGATION) ---
   static const String homeScreen = '/home-screen';
   static const String searchScreen = '/search-screen';
   static const String notificationScreen = '/notification-screen';
   static const String settingsScreen = '/settings-screen';
+
+  // --- SEARCH SUB-SCREENS ---
   static const String branchScreen = '/search/branch';
   static const String exchangeRateScreen = '/search/exchange-rate';
   static const String exchangeScreen = '/search/exchange';
   static const String interestScreen = '/search/interest-rate';
+
+  // --- HOME FEATURES ---
   static const String transactionReport = '/transaction-report';
   static const String accountAndCard = '/account-and-card';
   static const String transfer = '/transfer';
   static const String withdraw = '/withdraw';
   static const String mobilePrepaid = '/mobile-prepaid';
   static const String payBills = '/pay-bills';
+  static const String billDetails =
+      '/bill/:billId'; // Dynamic route for bill details
   static const String saveOnline = '/save-online';
   static const String creditCard = '/credit-card';
   static const String beneficiary = '/beneficiary';
+
+  // --- INNER/DETAIL SCREENS ---
   static const String cardDetails = '/card-details';
   static const String successfulScreen = '/success';
   static const String confirmPrepaid = '/confirm-prepaid';
@@ -58,11 +71,13 @@ class AppRouter {
   static final router = GoRouter(
     initialLocation: splash,
     routes: [
+      // --- CORE ---
       GoRoute(
         path: splash,
         name: 'splash',
         builder: (context, state) => const SplashScreen(),
       ),
+      // --- AUTHENTICATION ---
       GoRoute(
         path: signIn,
         name: 'signin',
@@ -88,6 +103,7 @@ class AppRouter {
         name: 'successs',
         builder: (context, state) => const SuccessScreen(),
       ),
+      // --- MAIN SCREENS (BOTTOM NAVIGATION) ---
       GoRoute(
         path: homeScreen,
         name: 'home',
@@ -108,6 +124,7 @@ class AppRouter {
         name: 'notifications',
         builder: (context, state) => const NotificationScreen(),
       ),
+      // --- SEARCH SUB-SCREENS ---
       GoRoute(
         path: branchScreen,
         name: 'branch',
@@ -128,6 +145,7 @@ class AppRouter {
         name: 'interest-rate',
         builder: (context, state) => const InterestScreen(),
       ),
+      // --- HOME FEATURES ---
       GoRoute(
         path: transactionReport,
         name: 'transaction-report',
@@ -169,6 +187,12 @@ class AppRouter {
         builder: (context, state) => const AccountAndCard(),
       ),
       GoRoute(
+        path: payBills,
+        name: 'pay-bills',
+        builder: (context, state) => const PayBills(),
+      ),
+      // --- INNER/DETAIL SCREENS ---
+      GoRoute(
         path: successfulScreen,
         name: 'success',
         builder: (context, state) {
@@ -194,9 +218,10 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: payBills,
-        name: 'pay-bills',
-        builder: (context, state) => const PayBills(),
+        path: billDetails,
+        name: 'bill-details',
+        builder: (context, state) =>
+            BillPaymentDetailsScreen(billId: state.pathParameters['billId']!),
       ),
     ],
   );

@@ -114,7 +114,8 @@ class PayBills extends StatelessWidget {
         ),
         trailing: Image.asset(imageUrl),
         onTap: () {
-          context.push('/bill/$title'.toLowerCase().replaceAll(' ', '-'));
+          final billId = title.toLowerCase().replaceAll(' ', '-');
+          context.pushNamed('bill-details', pathParameters: {'billId': billId});
         },
       ),
     );

@@ -35,7 +35,11 @@ class TextFieldWidget extends StatelessWidget {
           keyboardType: keyboardType,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(color: AppColors.neutral4),
+            hintStyle: TextStyle(
+              color: AppColors.neutral4,
+              fontWeight: FontWeight.w400,
+              fontSize: 14,
+            ),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.neutral1),
               borderRadius: BorderRadius.circular(16),

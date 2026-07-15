@@ -22,8 +22,8 @@ class ButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isActive ? onPressed : null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: isActive ? AppColors.primary1 : AppColors.neutral4,
-          disabledBackgroundColor: AppColors.neutral4,
+          backgroundColor: isActive ? AppColors.primary1 : Colors.black12,
+          disabledBackgroundColor: Colors.black12,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
@@ -32,7 +32,7 @@ class ButtonWidget extends StatelessWidget {
         child: Text(
           buttonText,
           style: AppTextStyles.body3.copyWith(
-            color: isActive ? AppColors.white : AppColors.neutral2,
+            color: isActive ? AppColors.white : Colors.white70,
           ),
         ),
       ),
