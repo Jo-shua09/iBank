@@ -92,7 +92,7 @@ class _BillPaymentDetailsScreenState extends State<BillPaymentDetailsScreen> {
                                     selectedAccountName ?? 'Choose company',
                                     style: AppTextStyles.caption2.copyWith(
                                       color: selectedAccountName != null
-                                          ? AppColors.neutral3
+                                          ? AppColors.neutral1
                                           : AppColors.neutral3,
                                       fontWeight: FontWeight.w500,
                                     ),

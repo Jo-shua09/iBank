@@ -26,6 +26,7 @@ class PayBills extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(height: 16.0),
                   _listBuilder(
                     context,
                     'Electric bill',
@@ -54,6 +55,25 @@ class PayBills extends StatelessWidget {
                     'assets/images/bill-4.jpg',
                   ),
                 ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+              vertical: 16.0,
+            ),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () => context.pushNamed('payment-history'),
+                child: Text(
+                  'Payment History',
+                  style: AppTextStyles.caption1.copyWith(
+                    color: AppColors.primary1,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ),
           ),

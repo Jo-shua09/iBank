@@ -14,6 +14,7 @@ import 'package:ibank/features/home/view/screens/common/successful_screen.dart';
 import 'package:ibank/features/home/view/screens/mobile_prepaid/mobile_prepaid.dart';
 import 'package:ibank/features/home/view/screens/save_online.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/pay_bills.dart';
+import 'package:ibank/features/home/view/screens/pay_bill/payment_history_screen.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/bill_payment_details_screen.dart';
 import 'package:ibank/features/home/view/screens/transaction_report.dart';
 import 'package:ibank/features/home/view/screens/transfer.dart';
@@ -59,6 +60,7 @@ class AppRouter {
   static const String payBills = '/pay-bills';
   static const String billDetails =
       '/bill/:billId'; // Dynamic route for bill details
+  static const String paymentHistory = '/payment-history';
   static const String saveOnline = '/save-online';
   static const String creditCard = '/credit-card';
   static const String beneficiary = '/beneficiary';
@@ -190,6 +192,11 @@ class AppRouter {
         path: payBills,
         name: 'pay-bills',
         builder: (context, state) => const PayBills(),
+      ),
+      GoRoute(
+        path: paymentHistory,
+        name: 'payment-history',
+        builder: (context, state) => const PaymentHistoryScreen(),
       ),
       // --- INNER/DETAIL SCREENS ---
       GoRoute(
