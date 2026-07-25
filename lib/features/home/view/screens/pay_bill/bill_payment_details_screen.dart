@@ -4,7 +4,6 @@ import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/utils/effects.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
-import 'package:ibank/core/widgets/text_field_widget.dart';
 
 class BillPaymentDetailsScreen extends StatefulWidget {
   final String billId;

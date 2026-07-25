@@ -12,6 +12,8 @@ import 'package:ibank/features/home/view/screens/account_and_card/card_details.d
 import 'package:ibank/features/home/view/screens/mobile_prepaid/confirm_mobile_prepaid.dart';
 import 'package:ibank/features/home/view/screens/common/successful_screen.dart';
 import 'package:ibank/features/home/view/screens/mobile_prepaid/mobile_prepaid.dart';
+import 'package:ibank/features/home/view/screens/save_online/choose_card_screen.dart';
+import 'package:ibank/features/home/view/screens/save_online/add_screen.dart';
 import 'package:ibank/features/home/view/screens/save_online/save_online.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/pay_bills.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/payment_history_screen.dart';
@@ -62,6 +64,8 @@ class AppRouter {
       '/bill/:billId'; // Dynamic route for bill details
   static const String paymentHistory = '/payment-history';
   static const String saveOnline = '/save-online';
+  static const String addSaveOnline = '/add';
+  static const String chooseCard = '/choose-card';
   static const String creditCard = '/credit-card';
   static const String beneficiary = '/beneficiary';
 
@@ -172,6 +176,16 @@ class AppRouter {
         path: saveOnline,
         name: 'save-online',
         builder: (context, state) => const SaveOnline(),
+      ),
+      GoRoute(
+        path: addSaveOnline,
+        name: 'add',
+        builder: (context, state) => const AddScreen(),
+      ),
+      GoRoute(
+        path: chooseCard,
+        name: 'choose-card',
+        builder: (context, state) => const ChooseCardScreen(),
       ),
       GoRoute(
         path: transfer,

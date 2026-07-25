@@ -114,7 +114,7 @@ class BranchScreen extends StatelessWidget {
                                 controller: scrollController,
                                 padding: const EdgeInsets.all(20),
                                 itemCount: 5,
-                                separatorBuilder: (_, __) =>
+                                separatorBuilder: (_, _) =>
                                     const Divider(height: 32),
                                 itemBuilder: (context, index) {
                                   return Row(
