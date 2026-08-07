@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ibank/core/constants/app_colors.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/widgets/top_bar_widget.dart';
 import 'package:ibank/core/utils/effects.dart';
@@ -13,12 +14,21 @@ class Beneficiary extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.white,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigate to the AddNewBeneficiary screen
+          context.pushNamed('add-beneficiary');
+        },
+        backgroundColor: AppColors.primary1,
+        shape: const CircleBorder(),
+        child: const Icon(Icons.add, size: 25, color: AppColors.white),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: statusBarHeight),
-          const TopBarWidget(title: 'Beneficiary'),
+          const TopBarWidget(title: 'Beneficiary', showSearchIcon: true),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
