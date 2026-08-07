@@ -4,8 +4,8 @@ import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/utils/effects.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
-import 'package:ibank/core/widgets/selection_input_widget.dart';
 import 'package:ibank/core/widgets/text_field_widget.dart';
+import 'package:ibank/features/home/view/screens/common/successful_screen.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -78,24 +78,11 @@ class _AddScreenState extends State<AddScreen> {
                           hintText: 'Choose time deposit',
                           selectedText: _selectedTimeDeposit,
                           onTap: () async {
-                            final DateTime? pickedDate = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(2000),
-                              lastDate: DateTime(2101),
-                            );
-                            if (pickedDate != null) {
-                              final TimeOfDay? pickedTime =
-                                  await showTimePicker(
-                                    context: context,
-                                    initialTime: TimeOfDay.now(),
-                                  );
-                              if (pickedTime != null) {
-                                setState(() {
-                                  _selectedTimeDeposit =
-                                      "${pickedDate.day}/${pickedDate.month}/${pickedDate.year} ${pickedTime.format(context)}";
-                                });
-                              }
+                            final result = await _showTimeDepositDialog();
+                            if (result != null) {
+                              setState(() {
+                                _selectedTimeDeposit = result;
+                              });
                             }
                           },
                         ),
@@ -107,7 +94,20 @@ class _AddScreenState extends State<AddScreen> {
                           controller: _amountController,
                         ),
                         const SizedBox(height: 24),
-                        ButtonWidget(buttonText: 'Verify', onPressed: () {}),
+                        ButtonWidget(
+                          buttonText: 'Verify',
+                          isActive: true,
+                          onPressed: () => context.pushNamed(
+                            'success',
+                            extra: SuccessfulScreen(
+                              imagePath: 'assets/images/add_screen.jpg',
+                              text: 'Save online Successful!',
+                              description:
+                                  'Congratulations! You have successfully saved online. Thank you for using iBank.',
+                              buttonText: 'Go to Home',
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -142,6 +142,48 @@ class _AddScreenState extends State<AddScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<String?> _showTimeDepositDialog() {
+    final timeOfDeposit = [
+      "3 months (interest rate 4%)",
+      "6 months (interest rate 4.5%)",
+      "12 months (interest rate 5%)",
+      "16 months (interest rate 5.5%)",
+      "24 months (interest rate 6%)",
+    ];
+
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: Text(
+            'Choose time deposit',
+            style: AppTextStyles.body2.copyWith(color: AppColors.neutral1),
+          ),
+          children: timeOfDeposit.map((option) {
+            final isSelected = _selectedTimeDeposit == option;
+            return SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, option);
+              },
+              child: Text(
+                option,
+                style: AppTextStyles.body3.copyWith(
+                  color: isSelected ? AppColors.primary1 : AppColors.neutral2,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                ),
+              ),
+            );
+          }).toList(),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          backgroundColor: AppColors.white,
+          surfaceTintColor: AppColors.white,
+        );
+      },
     );
   }
 

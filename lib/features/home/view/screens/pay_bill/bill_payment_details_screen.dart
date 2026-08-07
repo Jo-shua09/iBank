@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/utils/effects.dart';
+import 'package:ibank/core/widgets/top_bar_widget.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 
 class BillPaymentDetailsScreen extends StatefulWidget {
@@ -39,8 +40,10 @@ class _BillPaymentDetailsScreenState extends State<BillPaymentDetailsScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: statusBarHeight),
-          _topBarWidget(context, title),
+          SizedBox(
+            height: statusBarHeight,
+          ), // This is for the status bar padding
+          TopBarWidget(title: title),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -161,31 +164,6 @@ class _BillPaymentDetailsScreenState extends State<BillPaymentDetailsScreen> {
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _topBarWidget(BuildContext context, String title) {
-    return Container(
-      width: double.infinity,
-      height: 70,
-      decoration: const BoxDecoration(color: AppColors.white),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-              color: AppColors.neutral1,
-              size: 16,
-            ),
-          ),
-          Text(
-            title,
-            style: AppTextStyles.body1.copyWith(color: AppColors.neutral1),
           ),
         ],
       ),

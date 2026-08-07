@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
+import 'package:ibank/core/widgets/top_bar_widget.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({super.key});
@@ -19,7 +20,7 @@ class SuccessScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: statusBarHeight),
-            _topBarWidget(context),
+            const TopBarWidget(title: ''),
             const SizedBox(height: 16),
             Expanded(
               child: Padding(
@@ -65,30 +66,6 @@ class SuccessScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _topBarWidget(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 50,
-      decoration: BoxDecoration(color: AppColors.white),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: () {
-              context.pop();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              color: AppColors.neutral1,
-              size: 16,
-            ),
-            padding: EdgeInsets.zero,
-          ),
-        ],
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/core/utils/effects.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
+import 'package:ibank/core/widgets/top_bar_widget.dart';
 import 'package:ibank/core/data/dummy_data.dart';
 import 'package:ibank/core/utils/flag_utils.dart';
 
@@ -18,7 +19,7 @@ class ExchangeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _topBarWidget(context),
+            const TopBarWidget(title: 'Exchange'),
             const SizedBox(height: 16),
             Expanded(
               child: SingleChildScrollView(
@@ -91,34 +92,6 @@ class ExchangeScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _topBarWidget(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 50,
-      decoration: BoxDecoration(color: AppColors.white),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: () {
-              context.pop();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              color: AppColors.neutral1,
-              size: 16,
-            ),
-            padding: EdgeInsets.zero,
-          ),
-          Text(
-            'Exchange',
-            style: AppTextStyles.body1.copyWith(color: AppColors.neutral1),
-          ),
-        ],
       ),
     );
   }

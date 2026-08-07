@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
 import 'package:ibank/features/auth/controllers/sign_in_controller.dart';
+import 'package:ibank/core/widgets/top_bar_widget.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 import 'package:ibank/core/widgets/text_field_widget.dart';
 
@@ -43,7 +44,12 @@ class _SignInState extends State<SignIn> {
         child: Column(
           children: [
             SizedBox(height: statusBarHeight),
-            _topBarWidget(context),
+            const TopBarWidget(
+              title: 'Sign In',
+              bgColor: AppColors.primary1,
+              titleColor: AppColors.white,
+              iconColor: AppColors.white,
+            ),
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -156,31 +162,6 @@ class _SignInState extends State<SignIn> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _topBarWidget(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 70,
-      decoration: const BoxDecoration(color: AppColors.primary1),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: () => context.pop(),
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-              color: AppColors.white,
-              size: 16,
-            ),
-          ),
-          Text(
-            'Sign In',
-            style: AppTextStyles.body1.copyWith(color: AppColors.white),
-          ),
-        ],
       ),
     );
   }

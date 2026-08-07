@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ibank/core/constants/app_colors.dart';
 import 'package:ibank/core/constants/app_styles.dart';
+import 'package:ibank/core/widgets/top_bar_widget.dart';
 import 'package:ibank/core/widgets/button_widget.dart';
 
 class OtpVerification extends StatefulWidget {
@@ -38,7 +39,7 @@ class _OtpVerificationState extends State<OtpVerification> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _topBarWidget(context),
+            const TopBarWidget(title: 'OTP Verification'),
             const SizedBox(height: 16),
             Container(
               width: double.infinity,
@@ -133,34 +134,6 @@ class _OtpVerificationState extends State<OtpVerification> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _topBarWidget(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 50,
-      decoration: BoxDecoration(color: AppColors.white),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          IconButton(
-            onPressed: () {
-              context.pop();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              color: AppColors.neutral1,
-              size: 16,
-            ),
-            padding: EdgeInsets.zero,
-          ),
-          Text(
-            'OTP Verification',
-            style: AppTextStyles.body3.copyWith(color: AppColors.neutral1),
-          ),
-        ],
       ),
     );
   }

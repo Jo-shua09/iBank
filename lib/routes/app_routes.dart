@@ -6,7 +6,8 @@ import 'package:ibank/features/auth/view/sign_up.dart';
 import 'package:ibank/features/auth/view/success_screen.dart';
 import 'package:ibank/features/home/view/home_screen.dart';
 import 'package:ibank/features/home/view/screens/account_and_card/account_and_card.dart';
-import 'package:ibank/features/home/view/screens/beneficiary.dart';
+import 'package:ibank/features/home/view/screens/beneficiary/beneficiary.dart';
+import 'package:ibank/features/home/view/screens/beneficiary/add_new_beneficiary.dart';
 import 'package:ibank/features/home/view/screens/credit_card.dart';
 import 'package:ibank/features/home/view/screens/account_and_card/card_details.dart';
 import 'package:ibank/features/home/view/screens/mobile_prepaid/confirm_mobile_prepaid.dart';
@@ -14,6 +15,7 @@ import 'package:ibank/features/home/view/screens/common/successful_screen.dart';
 import 'package:ibank/features/home/view/screens/mobile_prepaid/mobile_prepaid.dart';
 import 'package:ibank/features/home/view/screens/save_online/choose_card_screen.dart';
 import 'package:ibank/features/home/view/screens/save_online/add_screen.dart';
+import 'package:ibank/features/home/view/screens/save_online/management_screen.dart';
 import 'package:ibank/features/home/view/screens/save_online/save_online.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/pay_bills.dart';
 import 'package:ibank/features/home/view/screens/pay_bill/payment_history_screen.dart';
@@ -66,8 +68,10 @@ class AppRouter {
   static const String saveOnline = '/save-online';
   static const String addSaveOnline = '/add';
   static const String chooseCard = '/choose-card';
+  static const String management = '/management';
   static const String creditCard = '/credit-card';
   static const String beneficiary = '/beneficiary';
+  static const String addBeneficiary = '/beneficiary/add';
 
   // --- INNER/DETAIL SCREENS ---
   static const String cardDetails = '/card-details';
@@ -168,6 +172,11 @@ class AppRouter {
         builder: (context, state) => const Beneficiary(),
       ),
       GoRoute(
+        path: addBeneficiary,
+        name: 'add-beneficiary',
+        builder: (context, state) => const AddNewBeneficiary(),
+      ),
+      GoRoute(
         path: mobilePrepaid,
         name: 'mobile-prepaid',
         builder: (context, state) => const MobilePrepaid(),
@@ -181,6 +190,11 @@ class AppRouter {
         path: addSaveOnline,
         name: 'add',
         builder: (context, state) => const AddScreen(),
+      ),
+      GoRoute(
+        path: management,
+        name: 'management',
+        builder: (context, state) => const ManagementScreen(),
       ),
       GoRoute(
         path: chooseCard,
