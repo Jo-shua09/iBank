@@ -62,8 +62,7 @@ class AppRouter {
   static const String withdraw = '/withdraw';
   static const String mobilePrepaid = '/mobile-prepaid';
   static const String payBills = '/pay-bills';
-  static const String billDetails =
-      '/bill/:billId'; // Dynamic route for bill details
+  static const String billDetails = '/bill/:billId';
   static const String paymentHistory = '/payment-history';
   static const String saveOnline = '/save-online';
   static const String addSaveOnline = '/add';
